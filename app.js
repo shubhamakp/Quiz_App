@@ -110,7 +110,10 @@ app.post('/question', (req, res, next) => {
                 res.render('questions', { obj: obj, ansobj: ansobj, corransobj: corransobj });
 
             } catch (e) {
-                console.log(e);
+                e.message = "error";
+                res.status(error.response.status)
+                return res.send(e.message);
+                // console.log(e);
             } finally {
                 await browser.close();
             }
