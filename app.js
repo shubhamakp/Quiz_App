@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+var PORT = process.env.PORT||3000;
 const path = require('path');
 const bodyparser = require('body-parser');
 const puppeteer = require('puppeteer');
@@ -117,4 +118,4 @@ app.post('/question', (req, res, next) => {
     }
 });
 
-app.listen(3000);
+app.listen(PORT);
