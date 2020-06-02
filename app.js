@@ -62,7 +62,6 @@ app.post('/question', (req, res, next) => {
 
             try {
                 const page = await browser.newPage();
-                // url = 'https://www.indiabix.com/current-affairs/2020-04-02/';
                 url = url1;
                 await page.goto(url, { waitUntil: 'load', timeout: 0 });
                 const scrapedData = await page.evaluate(() =>
@@ -112,12 +111,18 @@ app.post('/question', (req, res, next) => {
             } catch (e) {
                 e.message = "error";
                 res.status(error.response.status)
-                return res.send(e.message);
+                return res.send("hi");
                 // console.log(e);
             } finally {
                 await browser.close();
             }
-        })();
+        })()
+        .then(obj => {
+            console.log(obj)
+        })
+        .catch(err =>{
+            console.log(err)
+        });
     }
 });
 
