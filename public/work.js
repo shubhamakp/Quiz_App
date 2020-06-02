@@ -4,7 +4,10 @@ const questionContainerElement = document.getElementById('question-container')
 const questionElement = document.getElementById('question')
 const answerButtonsElement = document.getElementById('answer-buttons')
 const h1 = document.getElementById('text');
-
+var modal = document.getElementById("myModal");
+var span = document.getElementsByClassName("close")[0];
+var para1 = document.getElementsByClassName("para")[0];
+var para2 = document.getElementsByClassName("para")[1];
 let crrct = 0;
 
 let shuffledQuestions, currentQuestionIndex;
@@ -69,7 +72,31 @@ function selectAnswer(e) {
     // h1.classList.add('hide');
   } else {
     // h1.classList.remove('hide');
-    alert("you got " + crrct + " correct out of " + total);
+    var crrc = (crrct*100)/total;
+    var performance = '\n Performance : ';
+    if(crrc<25)
+    performance += 'Below Average';
+    else if(crrct<50)
+    performance +='Average';
+    else if(crrct<75)
+    performance += 'Very Good';
+    else
+    performance += 'Brilliant';
+
+    var text = "you got " + crrct + " correct out of " + total+ "\n";
+    para1.textContent = text;
+    para2.textContent = performance;
+    modal.style.display = "block";
+    
+
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
     startButton.innerText = 'Restart'
     startButton.classList.remove('hide')
   }
@@ -122,8 +149,8 @@ for (let item of items) {
   for (let i = val; i < ansitem.length && count <= 4; i += 2, count++) {
     var options = {};
     options['text'] = ansitem[i];
-    console.log(correctitem[idx] + '.')
-    console.log(ansitem[i - 1])
+    // console.log(correctitem[idx] + '.')
+    // console.log(ansitem[i - 1])
     if (correctitem[idx] + '.' === ansitem[i - 1])
       options['correct'] = true;
     else
@@ -136,7 +163,7 @@ for (let item of items) {
   questions.push(quess);
 
 }
-console.log(questions);
+// console.log(questions);
 
 // const questions = [
 //   {

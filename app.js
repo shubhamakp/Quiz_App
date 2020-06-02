@@ -6,25 +6,48 @@ const puppeteer = require('puppeteer');
 app.use(bodyparser.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static(path.join(__dirname, 'public')))
+var session = require('express-session');
+app.use(session({ secret: 'mySecret', resave: false, saveUninitialized: false }));
 app.set('view engine', 'ejs')
+
+
+
+app.get('/', (req, res) => {
+    var message = req.session.message || "nothing";
+    console.log(message);
+    res.render('index', { message: message })
+})
 
 app.post('/question', (req, res, next) => {
 
     let date = req.body.date;
     console.log(date);
-    var yg = date.substring(0, 4);
-    var mg = date.substring(5, 7);
-    var dg = date.substring(8, 10);
+   
+    var yg = parseInt(date.substring(0, 4));
+    var mg = parseInt(date.substring(5, 7));
+    var dg = parseInt(date.substring(8, 10));
+    console.log(yg,mg,dg)
 
     var d = new Date();
     var da = d.getDate();
-    var m = d.getMonth();
+    var m = d.getMonth()+1;
     var y = d.getFullYear();
-    console.log(da);
-    console.log(m);
-    console.log(y);
-
-    if (y - yg != 0 || mg > m || m - mg > 6 || dg > da) {
+    console.log(da,m,y);
+    
+    const oneDay = 86400000; // hours*minutes*seconds*milliseconds
+    const StartDate = new Date(y, m, da);
+    const EndDate = new Date(yg, mg, dg);
+    const start = Date.UTC(EndDate.getFullYear(), EndDate.getMonth(), EndDate.getDate());
+    const end = Date.UTC(StartDate.getFullYear(), StartDate.getMonth(), StartDate.getDate());
+    let diffDays = Math.round(Math.abs((start - end) / oneDay));
+    if(date==='')
+    diffDays=35;
+    console.log(diffDays)
+    if (diffDays > 30) {
+        if(date==='')
+        req.session.message='please enter a date first'
+        else
+        req.session.message = "Enter the date within a month";
         res.redirect('/')
     } else {
         let url1 = 'https://www.indiabix.com/current-affairs/' + date + '/';

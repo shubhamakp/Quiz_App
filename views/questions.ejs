@@ -12,6 +12,18 @@
 
 <body>
 
+  <div id="myModal" class="modal">
+
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <i>
+        <p class="para">Some text in the Modal..</p>
+        <p class="para">hello</p>
+      </i>
+    </div>
+
+  </div>
+
   <% for (var key of Object.keys(obj)) { %>
   <p class="yy" style="display:none"><%= obj[key] %></p>
   <% } %>
@@ -21,8 +33,8 @@
   <% } %>
 
   <% for (var key of Object.keys(corransobj)) { %>
-    <p class="corr" style="display:none"><%= corransobj[key] %></p>
-    <% } %>
+  <p class="corr" style="display:none"><%= corransobj[key] %></p>
+  <% } %>
 
   <div class="container">
     <div id="question-container" class="hide">

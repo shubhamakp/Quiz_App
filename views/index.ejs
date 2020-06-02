@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body
+        {
+            background: url('https://png.pngtree.com/thumb_back/fh260/back_our/20190621/ourmid/pngtree-2018-world-cup-quiz-beer-with-lobster-horizontal-poster-design-image_194203.jpg');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+        .container
+        {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 600px;
+            padding: 40px;
+            background : rgba(0,0,0,.7);
+            box-sizing: border-box;
+            border-radius: 10px;
+            box-shadow: 0 15px 25px rgba(0,0,0,0.5)
+        }
+        .text
+        {
+            color: #fff;
+            font: italic small-caps bold 16px/2 cursive;
+        }
+        .text2
+        {
+            color: rgb(236, 233, 35);
+            font: italic small-caps bold 20px/2 cursive;
+        }
+        .container input[type="submit"]
+        {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #fff;
+            background: #03a9f4;
+            margin-top: 10px;
+            padding: 8px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        h1{
+            margin: 0;
+        }
+        h3{
+            margin-top: 0;
+        }
+        input[type="submit"]:hover
+        {
+            background: #42098d;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="text">
+            <h1><i>Enter the date For the quiz</i></h1>
+            <h3><i>(Not before a month)</i></h3>
+        </div>
+        <% if(message!="nothing") { %>
+        <h2 class="text2">!!!!!! <i><%= message %></i> !!!!!!</h2>
+        <% } %>
+        <form class="form" action="/question" method="post">
+            <div class="date">
+                <input type="date" name="date">
+            </div>
+            <div class="submit">
+                <input type="submit">
+            </div>
+        </form>
+
+    </div>
+</body>
+
+</html>
