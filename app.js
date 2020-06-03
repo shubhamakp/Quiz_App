@@ -40,11 +40,11 @@ app.post('/question', (req, res, next) => {
     const EndDate = new Date(yg, mg, dg);
     const start = Date.UTC(EndDate.getFullYear(), EndDate.getMonth(), EndDate.getDate());
     const end = Date.UTC(StartDate.getFullYear(), StartDate.getMonth(), StartDate.getDate());
-    let diffDays = Math.round(Math.abs((start - end) / oneDay));
+    let diffDays = Math.round(((start - end) / oneDay));
     if(date==='')
     diffDays=35;
     console.log(diffDays)
-    if (diffDays > 30) {
+    if (diffDays > 30||diffDays<=0) {
         if(date==='')
         req.session.message='please enter a date first'
         else
