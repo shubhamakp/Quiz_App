@@ -36,8 +36,8 @@ app.post('/question', (req, res, next) => {
     console.log(da,m,y);
     
     const oneDay = 86400000; // hours*minutes*seconds*milliseconds
-    const StartDate = new Date(y, m, da);
-    const EndDate = new Date(yg, mg, dg);
+    const EndDate = new Date(y, m, da);
+    const StartDate = new Date(yg, mg, dg);
     const start = Date.UTC(EndDate.getFullYear(), EndDate.getMonth(), EndDate.getDate());
     const end = Date.UTC(StartDate.getFullYear(), StartDate.getMonth(), StartDate.getDate());
     let diffDays = Math.round(((start - end) / oneDay));
